@@ -1,0 +1,30 @@
+*~
+*.swp
+.#*
+\#*
+
+# Project files from IDEs.
+.classpath
+.project
+.settings
+*/.classpath
+*/.project
+*/.settings
+prj.el
+.jde/
+TAGS
+.taglist
+nb-configuration.xml
+nbactions.xml
+.ensime
+.idea/
+*.iml
+
+# Build and run artifacts.
+*/target/
+*/build/
+*/logs/
+*/pids/
+
+# Don't ignore the generated archetypes.
+!*/target/generated-sources/archetype/
