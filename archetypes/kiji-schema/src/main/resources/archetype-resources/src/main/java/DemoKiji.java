@@ -1,3 +1,6 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
 /**
  * (c) Copyright 2013 WibiData, Inc.
  *
@@ -17,7 +20,7 @@
  * limitations under the License.
  */
 
-package org.kiji.examples;
+package ${package};
 
 import java.io.FileInputStream;
 import java.io.IOException;

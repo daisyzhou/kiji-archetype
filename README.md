@@ -3,22 +3,30 @@ Kiji Archetypes
 This project is a work-in-progress.  It contains the contents of the kiji
 archetypes.
 
+
 Generating Projects from Archetypes
 -------------------------------------------------------------------------------
-This project contains two directories:
-  a Kiji Schema blank project,
-  and a Kiji Mapreduce blank project.
+This project contains two projects:
+  * kiji-schema, a Kiji Schema blank project,
+  * kiji-mr, a Kiji Mapreduce blank project.
+
+The archetypes have already been generated from these projects and
+exist in the directories archetypes/kiji-schema and archetypes/kiji-mr.
 
 To install the archetypes locally, go to
-    $ cd kiji-archetype/kiji-schema/target/generated-sources/archetype
+
+    $ cd ./archetypes/kiji-schema/target/generated-sources/archetype
 or
-    $ cd kiji-archetype/kiji-mr/target/generated-sources/archetype
+
+    $ cd ./archetypes/kiji-mr/target/generated-sources/archetype
 
 and type
+
     $ mvn install
 
 Then go to where you want the archetype to be installed and type
-    $ mvn archetype:generate -DarchetypeCatalog-local
+
+    $ mvn archetype:generate -DarchetypeCatalog=local
 and select the archetype you wish to generate.
 
 
@@ -28,9 +36,11 @@ These archetypes were generated with maven's archetype plugin 2.0.x,
 which removes the need to write an XML file to generate the archetype.
 
 You can re-generate them yourself from the project root directory
-(i.e. kiji-archetype/kiji-mr or kiji-archetype/kiji-schema) with the command:
+(i.e. ./kiji-mr or ./kiji-schema) with the command:
+
     mvn archetype:create-from-project
 which will put the archetype in target/generated-sources/archetype.
+Go to that directory and mvn install to install the archetype locally.
 
 
 TODO
