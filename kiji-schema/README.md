@@ -24,11 +24,14 @@ see:
   www.kiji.org
   https://github.com/kijiproject/kiji-schema
 
-It contains a .ddl file that creates a table, and a .json file that is equivalent.
+It contains a folder src/main/layout which contains a .ddl file that creates a table,
+and an equivalent .json file.
+
 An .avdl record is defined in src/main/avro/ExampleRecord.avdl, and example usage
 of the KijiSchema API is in src/main/java/org/kiji/examples/DemoKiji.java.
+
 
 To run the demo, build the jars:
     mvn package
 run:
-    kiji jar target/kiji-schema-blank-1.0.0-rc4-SNAPSHOT-release/kiji-schema-blank-1.0.0-rc4-SNAPSHOT/lib/* org.kiji.examples.DemoKiji
+    kiji jar target/*-release/*/lib/*.jar <your.group.id>.DemoKiji

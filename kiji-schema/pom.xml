@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.kiji.examples</groupId>
-  <artifactId>kiji-schema-blank</artifactId>
+  <artifactId>kiji-schema-basic</artifactId>
   <version>1.0.0-rc4-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -31,8 +31,8 @@
     <version>1.0.3-SNAPSHOT</version>
   </parent>
 
-  <name>Kiji Schema Blank Project</name>
-  <description>A blank Kiji schema project.</description>
+  <name>Kiji Schema Basic Project</name>
+  <description>A skeleton Kiji schema project.</description>
   <url>http://www.kiji.org</url>
 
   <properties>

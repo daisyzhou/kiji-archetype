@@ -57,7 +57,7 @@ public final class DemoKiji {
     // First we define some constants that we use for our demo.
 
     // The table description is a JSON file that we read in.
-    final String tableDesc = "table_desc.json";
+    final String tableDesc = "src/main/layout/table_desc.json";
     // The name of the table we will create in this demo.
     final String tableName = "users";
     // The ID of the entity we will use in this demo.
