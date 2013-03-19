@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.kiji.mapreduce.lib.produce;
+package org.kiji.examples.produce;
 
 import java.io.IOException;
 import java.util.HashMap;
