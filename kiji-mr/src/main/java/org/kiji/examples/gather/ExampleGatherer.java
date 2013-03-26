@@ -22,12 +22,16 @@ package org.kiji.examples.gather;
 import java.io.IOException;
 import java.util.NavigableMap;
 
+import org.apache.avro.Schema;
+import org.apache.avro.mapred.AvroKey;
 import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.kiji.examples.ExampleRecord;
+import org.kiji.mapreduce.avro.AvroKeyWriter;
+import org.kiji.mapreduce.avro.AvroValueWriter;
 import org.kiji.mapreduce.gather.KijiGatherer;
 import org.kiji.mapreduce.gather.GathererContext;
 import org.kiji.schema.KijiDataRequest;
@@ -38,43 +42,57 @@ import org.kiji.schema.KijiRowData;
  * Example gatherer.
  *
  * <p>
- * This gatherer emits a pair of the input text and the number 1, which is a pattern
+ * This gatherer emits a pair of the input text and the number 1. This is a pattern
  * often used while counting.
  * </p>
  * <p>
  * Change the <code>getDataRequest()</code> method to change the column this gatherer uses as input.
  * Change the <code>gather()</code> method to change what kind of output this gatherer produces.
  * </p>
+ * <p>
+ * This example gatherer implements both AvroKeyWriter and AvroValueWriter, but only the Key is
+ * an Avro class.  The AvroValueWriter.getAvroValueWriterSchema() method is a dummy implementation
+ * that you will have to edit if your output value is an Avro record.  If your keys or values are
+ * not Avro classes, you can remove the AvroKeyWriter and AvroValueWriter interfaces, respectively.
+ * </p>
  */
-public class ExampleGatherer extends KijiGatherer<Text, LongWritable> {
+public class ExampleGatherer
+    extends KijiGatherer<AvroKey<ExampleRecord>, LongWritable>
+    implements AvroKeyWriter, AvroValueWriter {
   private static final Logger LOG = LoggerFactory.getLogger(ExampleGatherer.class);
 
   /** The family:qualifier of the column to read in. **/
   private static final String COLUMN_FAMILY = "your_column_family";
   private static final String COLUMN_QUALIFIER = "your_column_qualifier";
 
-  /** Only keep one Text object around to reduce the chance of a garbage collection pause.*/
-  private Text mText;
+  /** Only keep one ExampleRecord around to reduce the chance of a garbage collection pause.*/
+  private ExampleRecord mRecord;
   /** Only keep one LongWritable object around to reduce the chance of a garbage collection pause.*/
   private static final LongWritable ONE = new LongWritable(1);
 
   /** {@inheritDoc} */
   @Override
   public Class<?> getOutputKeyClass() {
-    return Text.class;
+    // Since our output key class is AvroKey, we also have to override
+    // getAvroKeyWriterSchema() below to specify the exact schema to use.
+    return AvroKey.class;
   }
 
   /** {@inheritDoc} */
   @Override
   public Class<?> getOutputValueClass() {
+    // TODO: If you want the value to be AvroValue, you will have to override
+    // getAvroValueWriterSchema() below to specify the exact schema to use.
     return LongWritable.class;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setup(GathererContext<Text, LongWritable> context) throws IOException {
+  public void setup(
+      GathererContext<AvroKey<ExampleRecord>,
+      LongWritable> context) throws IOException {
     super.setup(context); // Any time you override setup, call super.setup(context);
-    mText = new Text();
+    mRecord = new ExampleRecord();
   }
 
   /** {@inheritDoc} */
@@ -91,18 +109,31 @@ public class ExampleGatherer extends KijiGatherer<Text, LongWritable> {
 
   /** {@inheritDoc} */
   @Override
-  public void gather(KijiRowData row, GathererContext<Text, LongWritable> context)
+  public void gather(KijiRowData row, GathererContext<AvroKey<ExampleRecord>, LongWritable> context)
       throws IOException {
     // TODO Implement the body of your gather method here.
-    // This gatherer emits a pair of the text and the number 1, which is a pattern often used
+    // This gatherer emits a pair of the key and the number 1, which is a pattern often used
     // when counting.
     NavigableMap<Long, CharSequence> counts = row.getValues(COLUMN_FAMILY, COLUMN_QUALIFIER);
     for (CharSequence key : counts.values()) {
-      mText.set(key.toString());
-      context.write(mText, ONE);
-      mText.clear();
+      mRecord.setId(key);
+      context.write(new AvroKey<ExampleRecord>(mRecord), ONE);
     }
 
   }
 
+  /** {@inheritDoc} */
+  @Override
+  public Schema getAvroKeyWriterSchema() {
+    // Since the class of our key is AvroKey, we specify here which schema to use.
+    return ExampleRecord.SCHEMA$;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Schema getAvroValueWriterSchema() {
+    // TODO: If getOutputValueClass returns AvroValue, you must override this method
+    // to provide the writer schema of the value class.
+    return null;
+  }
 }

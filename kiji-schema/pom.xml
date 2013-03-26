@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <!--
-    (c) Copyright 2012 WibiData, Inc.
+    (c) Copyright 2013 WibiData, Inc.
 
     See the NOTICE file distributed with this work for additional
     information regarding copyright ownership.
@@ -22,7 +22,7 @@
 
   <groupId>org.kiji.examples</groupId>
   <artifactId>kiji-schema-basic</artifactId>
-  <version>1.0.0-rc4-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>jar</packaging>
 
   <parent>
@@ -36,8 +36,8 @@
   <url>http://www.kiji.org</url>
 
   <properties>
-    <kiji-schema.version>1.0.0-rc4-SNAPSHOT</kiji-schema.version>
-    <kiji-cdh4-platform.version>${kiji-schema.version}</kiji-cdh4-platform.version>
+    <kiji-schema.version>1.0.0-SNAPSHOT</kiji-schema.version>
+    <kiji-cdh4-platform.version>1.0.0-rc6-SNAPSHOT</kiji-cdh4-platform.version>
   </properties>
 
   <build>
@@ -60,12 +60,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <!-- configured with files in the src/main/assembly/ directory -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

@@ -6,7 +6,7 @@
   description: "example for maven archetype",
   version: "kiji-1.0.0",
   keys_format: {
-    encoding: "HASH",
+    encoding: "HASH_PREFIX",
     hash_type: "MD5",
     hash_size: 16
   },

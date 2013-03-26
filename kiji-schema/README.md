@@ -2,7 +2,7 @@ Kiji Schema Blank Project
 version ${project.version}
 
 
-  (c) Copyright 2012 WibiData, Inc.
+  (c) Copyright 2013 WibiData, Inc.
 
   See the NOTICE file distributed with this work for additional
   information regarding copyright ownership.
@@ -25,7 +25,8 @@ see:
   https://github.com/kijiproject/kiji-schema
 
 It contains a folder src/main/layout which contains a .ddl file that creates a table,
-and an equivalent .json file.
+and an equivalent .json file.  Edit the .ddl file to modify the table description. The JSON
+file should not be edited directly and is only used programmatically in the demonstration DemoKiji.
 
 An .avdl record is defined in src/main/avro/ExampleRecord.avdl, and example usage
 of the KijiSchema API is in src/main/java/org/kiji/examples/DemoKiji.java.
