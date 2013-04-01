@@ -32,7 +32,7 @@
   </parent>
 
   <name>Kiji MR Skeleton</name>
-  <description>A Kiji MR skeleton.</description>
+  <description>A skeleton Kiji MR project.</description>
   <url>http://www.kiji.org</url>
 
   <properties>

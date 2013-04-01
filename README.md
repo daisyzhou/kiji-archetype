@@ -16,7 +16,7 @@ generate the archetype.
 You can generate them from the project root directory (i.e. ./kiji-mr or ./kiji-schema)
 with the command:
 
-    mvn archetype:create-from-project
+    mvn archetype:create-from-project -Darchetype.properties=archetype.properties
 which will put the archetype in target/generated-sources/archetype.
 Go to that directory and mvn install to install the archetype locally.
 
